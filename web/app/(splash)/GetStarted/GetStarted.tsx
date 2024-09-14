@@ -22,8 +22,8 @@ export const GetStarted = () => {
           <Image
             src="/Hackd.png"
             alt="Logo"
-            width={256}
-            height={256}
+            width={200}
+            height={200}
             className="rounded-full"/>
         </h1>
         <div className="mb-8 text-center text-lg text-muted-foreground">
@@ -37,7 +37,7 @@ export const GetStarted = () => {
             <Link href="https://docs.convex.dev/home">Convex docs</Link>
           </Button>
         </div>
-        <div className="flex flex-col gap-4 bg-muted/50 p-12 dark:bg-transparent">
+        {/* <div className="flex flex-col gap-4 bg-muted/50 p-12 dark:bg-transparent">
           <h2 className="mb-1 text-center text-3xl font-bold md:text-4xl ">
             Next steps
           </h2>
@@ -104,9 +104,9 @@ export const GetStarted = () => {
               </CardContent>
             </Card>
           </div>
-        </div>
+        </div> */}
       </div>
-      <div className="px-20 pb-20">
+      {/* <div className="px-20 pb-20">
         <div className="container">
           <h2 className="mb-6 text-center text-2xl font-bold">
             Helpful resources
@@ -129,7 +129,7 @@ export const GetStarted = () => {
             </Resource>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
