@@ -8,6 +8,7 @@ import {
   PlayIcon,
   StackIcon,
 } from "@radix-ui/react-icons";
+import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";
 
@@ -15,9 +16,15 @@ export const GetStarted = () => {
   return (
     <div className="flex grow flex-col">
       <div className="container mb-20 flex grow flex-col justify-center">
-        <h1 className="mb-8 mt-16 flex flex-col items-center gap-8 text-center text-6xl font-extrabold leading-none tracking-tight">
-          Your app powered by
-          <ConvexLogo width={377} height={44} />
+        <h1 className="mb-8 mt-16 flex flex-col items-center  text-center text-6xl font-extrabold leading-none tracking-tight">
+          Find your next big team with
+          {/* <ConvexLogo width={377} height={44} /> */}
+          <Image
+            src="/Hackd.png"
+            alt="Logo"
+            width={256}
+            height={256}
+            className="rounded-full"/>
         </h1>
         <div className="mb-8 text-center text-lg text-muted-foreground">
           Build a realtime full-stack app in no time.
