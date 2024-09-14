@@ -8,6 +8,7 @@ import {
   PlayIcon,
   StackIcon,
 } from "@radix-ui/react-icons";
+import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";
 
@@ -15,9 +16,15 @@ export const GetStarted = () => {
   return (
     <div className="flex grow flex-col">
       <div className="container mb-20 flex grow flex-col justify-center">
-        <h1 className="mb-8 mt-16 flex flex-col items-center gap-8 text-center text-6xl font-extrabold leading-none tracking-tight">
-          Your app powered by
-          <ConvexLogo width={377} height={44} />
+        <h1 className="mb-8 mt-16 flex flex-col items-center  text-center text-6xl font-extrabold leading-none tracking-tight">
+          Find your next big team with
+          {/* <ConvexLogo width={377} height={44} /> */}
+          <Image
+            src="/Hackd.png"
+            alt="Logo"
+            width={200}
+            height={200}
+            className="rounded-full"/>
         </h1>
         <div className="mb-8 text-center text-lg text-muted-foreground">
           Build a realtime full-stack app in no time.
@@ -30,7 +37,7 @@ export const GetStarted = () => {
             <Link href="https://docs.convex.dev/home">Convex docs</Link>
           </Button>
         </div>
-        <div className="flex flex-col gap-4 bg-muted/50 p-12 dark:bg-transparent">
+        {/* <div className="flex flex-col gap-4 bg-muted/50 p-12 dark:bg-transparent">
           <h2 className="mb-1 text-center text-3xl font-bold md:text-4xl ">
             Next steps
           </h2>
@@ -97,9 +104,9 @@ export const GetStarted = () => {
               </CardContent>
             </Card>
           </div>
-        </div>
+        </div> */}
       </div>
-      <div className="px-20 pb-20">
+      {/* <div className="px-20 pb-20">
         <div className="container">
           <h2 className="mb-6 text-center text-2xl font-bold">
             Helpful resources
@@ -122,7 +129,7 @@ export const GetStarted = () => {
             </Resource>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
