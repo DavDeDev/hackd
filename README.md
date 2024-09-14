@@ -46,10 +46,12 @@ A basic Next.js app with a Dockerfile and docker-compose ready to deploy to AWS 
    ```
 
 7. **Run the Application**  
+   Before doing npm run dev, you show make sure that the email your github is associated with, has been added as an Admin in the convex Member tab. 
    Start the application by navigating to the project root and running:
    ```
    npm run dev
    ```
+   Select choose an existing project, pick the right team, pick yes when it comes to the right project, and you are good.
 
    If there are issues with missing configurations, ensure the `.env.local` file is set correctly and run `defang config` to manage sensitive configs.
 
