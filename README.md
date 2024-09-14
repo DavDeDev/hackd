@@ -43,6 +43,7 @@ A basic Next.js app with a Dockerfile and docker-compose ready to deploy to AWS 
    Install all required dependencies by running:
    ```
    npm install
+   npm install @radix-ui/react-label
    ```
 
 7. **Run the Application**  
