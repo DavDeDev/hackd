@@ -22,6 +22,5 @@ jobs:
       with:
         config-env-vars: "NEXT_PUBLIC_CONVEX_URL"
   
-
-env:
-  NEXT_PUBLIC_CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
+      env:
+        NEXT_PUBLIC_CONVEX_URL: ${{ secrets.NEXT_PUBLIC_CONVEX_URL }}
