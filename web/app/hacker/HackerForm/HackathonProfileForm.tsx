@@ -1,66 +1,57 @@
-"use client"; 
-import { Button } from '@/components/ui/button';
-import { Form, FormItem } from '@/components/ui/form';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { useState } from 'react';
+"use client"
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 
-const SurveyForm = () => {
-  const [formData, setFormData] = useState(Array(20).fill(3)); // Default score is 3 for each question
+const questions = [
+  "How satisfied are you with our product?",
+  "How likely are you to recommend our product to others?",
+  "How would you rate the ease of use of our product?",
+  "How would you rate our customer support?",
+  "How well does our product meet your needs?"
+]
 
-  const questions = [
-    "I prefer to lead team projects.",
-    "I am excited about attending multiple workshops and events at the hackathon.",
-    "I enjoy brainstorming and collaborating on ideas with others.",
-    "I like when my teammates have skills that complement mine.",
-    "Winning the hackathon is my top priority.",
-    "I am open to learning new technologies during the event.",
-    "I work best under tight deadlines.",
-    "I prefer working with teammates who share similar strengths.",
-    "I appreciate constructive feedback on my work.",
-    "I am confident in my coding abilities.",
-    "I enjoy taking on challenging problems.",
-    "I prefer a well-structured plan before starting a project.",
-    "I am comfortable adapting to changes during the project.",
-    "I like to focus on one task at a time.",
-    "I am eager to help teammates who are struggling.",
-    "I value creativity over functionality in projects.",
-    "I believe communication is key to a successful team.",
-    "I am motivated by learning rather than winning.",
-    "I have experience with version control systems like GitHub.",
-    "I enjoy working late hours to meet project goals."
-  ];
-
-  const handleInputChange = (index: number, value: number) => {
-    const newFormData = [...formData];
-    newFormData[index] = value;
-    setFormData(newFormData);
-  };
+export default function Component() {
+  const [answers, setAnswers] = useState<Record<number, string>>({})
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log(formData); // Submit logic here
-  };
+    e.preventDefault()
+    console.log("Submitted answers:", answers)
+    // Here you would typically send the answers to your backend
+  }
 
   return (
-    <Form onSubmit={handleSubmit} className="survey-form">
-      <h1>Survey</h1>
-      {questions.map((question, index) => (
-        <FormItem key={index} className="survey-question">
-          <label>{question}</label>
-          <RadioGroup
-            value={formData[index]}
-            onChange={(e) => handleInputChange(index, parseInt(e.target.value))}
-          >
-            {[1, 2, 3, 4, 5].map((value) => (
-              <RadioGroupItem key={value} value={value}/>
-             
-            ))}
-          </RadioGroup>
-        </FormItem>
-      ))}
-      <Button type="submit">Find your match</Button>
-    </Form>
-  );
-};
-
-export default SurveyForm;
+    <Card className="w-full h-full mx-auto mt-5 text-center bg-transparent border-0 shadow-none">
+      <CardHeader>
+        <CardTitle >Personality Form</CardTitle>
+        <CardDescription>Please answer the following questions on a scale of 1 to 5, where 1 is the lowest and 5 is the highest.</CardDescription>
+      </CardHeader>
+      <form onSubmit={handleSubmit}>
+        <CardContent className="space-y-6">
+          {questions.map((question, index) => (
+            <div key={index} className="space-y-2">
+              <Label htmlFor={`question-${index}`}>{question}</Label>
+              <RadioGroup
+                id={`question-${index}`}
+                onValueChange={(value) => setAnswers(prev => ({ ...prev, [index]: value }))}
+                className="flex space-x-4 justify-center"
+              >
+                {[1, 2, 3, 4, 5].map((value) => (
+                  <div key={value} className="flex items-center space-x-1">
+                    <RadioGroupItem value={value.toString()} id={`q${index}-${value}`} />
+                    <Label htmlFor={`q${index}-${value}`}>{value}</Label>
+                  </div>
+                ))}
+              </RadioGroup>
+            </div>
+          ))}
+        </CardContent>
+        <CardFooter className="justify-center mt-5">
+          <Button type="submit" className="">Submit Feedback</Button>
+        </CardFooter>
+      </form>
+    </Card>
+  )
+}
