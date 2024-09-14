@@ -1,0 +1,44 @@
+name: CI Pipeline
+
+# Controls when the workflow will run
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
+
+# Specifies the jobs that will run
+jobs:
+  lint-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    # Set default working directory for all steps in the job
+    defaults:
+      run:
+        working-directory: ./web
+
+    # Steps to execute
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      # Set up Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x' # Change this to the required Node version
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm install
+
+      # Run linting
+      - name: Run ESLint
+        run: npm run lint
+      # Removes this step to save time
+      # # Build the Next.js app
+      # - name: Build the Next.js app
+      #   run: npm run build
