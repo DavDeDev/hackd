@@ -5,6 +5,8 @@ services:
     build:
       context: ./web
       dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_CONVEX_URL: https://rare-perch-160.convex.cloud
     ports:
       - target: 3000
         mode: ingress
