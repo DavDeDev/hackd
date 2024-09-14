@@ -25,12 +25,11 @@ A basic Next.js app with a Dockerfile and docker-compose ready to deploy to AWS 
    To authenticate with AWS, follow [this guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html).
 
 4. **Set Up Environment Variables**  
-   Copy the `.env.local.template` file and rename it to `.env.local`. Then insert the following variables into the `.env.local` file:
-   ```
-   CONVEX_DEPLOYMENT=dev:rare-perch-160
-   NEXT_PUBLIC_CONVEX_URL=https://rare-perch-160.convex.cloud
-   SETUP_SCRIPT_RAN=1
-   ```
+   Copy the `.env.local.template` file and rename it to `.env.local`. Then fill the environment variables with the required values.
+
+5. **Set up Authentication**
+   To setup Convex authentication, follow the steps in [this tutorial](https://labs.convex.dev/auth/config/oauth)
+   From this, you would get the necessary variables to fill up what is needed as indicated in the .env template. 
 
 5. **Navigate to the Web Directory**  
     To ensure you're in the right project directory where the Next.js app is located, move to the `web` folder by running the command:
