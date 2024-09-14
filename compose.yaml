@@ -8,6 +8,8 @@ services:
     ports:
       - target: 3000
         mode: ingress
+    environment:
+      NEXT_PUBLIC_CONVEX_URL:
     deploy:
       resources:
         reservations:
