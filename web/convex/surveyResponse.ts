@@ -18,7 +18,7 @@ export const listSurveyResponses = query({
 });
 
 export const submitSurveyResponses = mutation({
-  args: { responses: v.array(v.object({ body: v.string(), author: v.string() })) },
+  args: { responses: v.object({ body: v.string(), author: v.string() }) },
   handler: async (ctx, { responses }) => {
     const userId = await getAuthUserId(ctx);
     if (userId === null) {
@@ -26,15 +26,11 @@ export const submitSurveyResponses = mutation({
     }
 
     // Submit each response into the new survey_responses table.
-    await Promise.all(
-      responses.map(async (response) => {
-        await ctx.db.insert("survey_responses", {
-          response: response.body,
-          userId,
-          
-          // timestamp: Date.now(),
-        });
-      })
-    );
+    await ctx.db.insert("survey_responses", {
+      response: responses.body,
+      userId,
+
+      // timestamp: Date.now(),
+    });
   },
 });

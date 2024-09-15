@@ -127,10 +127,11 @@ export default function Component({ viewer }: { viewer: Id<"users"> }) {
       setCurrentPage(currentPage + 1)
       setCurrentQuestionIndex(0)
     } else {
-      const formattedResponses = Object.entries(answers).map(([questionId, value]) => ({
-        body: value, 
-        author: viewer  // Example author, replace with actual author
-      }))
+      console.log(JSON.stringify(answers))
+     const formattedResponses = {
+      body: JSON.stringify(answers),
+      author: viewer
+     }
       
       console.log("Submitted answers:", formattedResponses)
       submitResponses({ responses: formattedResponses })
