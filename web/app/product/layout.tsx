@@ -24,10 +24,7 @@ function ProductMenu() {
           Chat
         </MenuLink>
 
-        <MenuLink href="https://docs.convex.dev">
-          <ReaderIcon className="h-4 w-4" />
-          Docs
-        </MenuLink>
+       
         <MenuLink href="/">
           <HomeIcon className="h-4 w-4" />
           Home
