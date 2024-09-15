@@ -264,14 +264,13 @@ export default function MatchingView() {
 
               {/* Display Larger Avatar */}
               <div className="flex justify-center sm:justify-start mt-6">
-                <Image
-                  width={64}
-                  height={64}
+                <img
                   src={tqProfile.avatar_url}
                   alt={`${tqProfile.name}'s avatar`}
                   className="rounded-full w-56 h-56 object-cover"
                 />
               </div>
+
             </div>
           )}
           
