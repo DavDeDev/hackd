@@ -8,6 +8,7 @@ import { Id } from "@/convex/_generated/dataModel"
 import { useMutation } from "convex/react"
 import { useEffect, useRef, useState } from "react"
 import { api } from "../../../convex/_generated/api"
+import { useRouter } from "next/navigation"
 const questions = [
   {
     "id": 1,
@@ -115,6 +116,7 @@ const questionsPerPage = 5;
 const totalPages = Math.ceil(questions.length / questionsPerPage);
 
 export default function Component({ viewer }: { viewer: Id<"users"> }) {
+  const router = useRouter(); 
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [currentPage, setCurrentPage] = useState(1);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -143,6 +145,7 @@ export default function Component({ viewer }: { viewer: Id<"users"> }) {
         author: viewer,
       };
       submitResponses({ responses: formattedResponses });
+      router.push('/matching')
     }
   };
 
