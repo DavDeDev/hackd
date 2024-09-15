@@ -1,79 +1,135 @@
-import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Button } from "@/components/ui/button"
+import { GithubIcon } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
 
-const Match = () => {
-  const matches = [
-    { name: 'David', role: '3rd Year Software Engineer', skills: 'Java, Python, React', photo: 'https://via.placeholder.com/150' },
-    { name: 'David', role: '3rd Year Software Engineer', skills: 'Java, Python, React', photo: 'https://via.placeholder.com/150' },
-    { name: 'David', role: '3rd Year Software Engineer', skills: 'Java, Python, React', photo: 'https://via.placeholder.com/150' },
-    { name: 'David', role: '3rd Year Software Engineer', skills: 'Java, Python, React', photo: 'https://via.placeholder.com/150' },
-    { name: 'David', role: '3rd Year Software Engineer', skills: 'Java, Python, React', photo: 'https://via.placeholder.com/150' }
-  ];
+const people = [
+  {
+    name: "Alice Johnson",
+    description: "Full-stack developer with 5 years of experience",
+    skills: ["React", "Node.js", "Python"],
+    avatar: "/placeholder.svg?height=40&width=40",
+    github: "alice-johnson",
+    languages: { JavaScript: 50, Python: 30, HTML: 20 }
+  },
+  {
+    name: "Bob Smith",
+    description: "UX/UI designer passionate about user-centered design",
+    skills: ["Figma", "Adobe XD", "Sketch"],
+    avatar: "/placeholder.svg?height=40&width=40",
+    github: "bob-smith",
+    languages: { JavaScript: 20, CSS: 60, HTML: 20 }
+  },
+  {
+    name: "Charlie Brown",
+    description: "Data scientist specializing in machine learning",
+    skills: ["Python", "TensorFlow", "SQL"],
+    avatar: "/placeholder.svg?height=40&width=40",
+    github: "charlie-brown",
+    languages: { Python: 70, R: 20, SQL: 10 }
+  },
+  {
+    name: "Diana Martinez",
+    description: "DevOps engineer with cloud expertise",
+    skills: ["AWS", "Docker", "Kubernetes"],
+    avatar: "/placeholder.svg?height=40&width=40",
+    github: "diana-martinez",
+    languages: { Shell: 40, Python: 30, YAML: 30 }
+  },
+  {
+    name: "Ethan Williams",
+    description: "Mobile app developer focused on cross-platform solutions",
+    skills: ["React Native", "Flutter", "Swift"],
+    avatar: "/placeholder.svg?height=40&width=40",
+    github: "ethan-williams",
+    languages: { JavaScript: 40, Dart: 30, Swift: 30 }
+  }
+]
 
+const LanguageBar = ({ languages }: {languages: any}) => {
+  const totalPercentage = Object.values(languages).reduce((sum, value) => sum + value, 0)
   return (
-    <div className="min-h-screen" style={{ backgroundColor: '#f6f1e7', padding: '2rem' }}>
-      {/* Header Section */}
-      <div className="text-center mb-8">
-        <h1 className="text-5xl font-bold text-[#707853] mb-4">Let’s find your match!</h1>
-        <div className="flex justify-center items-center mb-6">
-          <img src="https://via.placeholder.com/150x150" alt="Pie Chart" className="w-60 h-60 rounded-full mr-8 shadow-lg transition-transform duration-300 hover:scale-105" />
-          <div className="text-[#7f5747] text-lg font-bold bg-white p-4 rounded-lg shadow-md">
-            <p>Python - 71.7%</p>
-            <p>JavaScript - 22.9%</p>
-            <p>Other - 2.7%</p>
-          </div>
-        </div>
-      </div>
+    <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
+      {Object.entries(languages).map(([lang, percentage], index) => (
+        <div
+          key={lang}
+          className="h-full float-left"
+          style={{
+            width: `${(percentage / totalPercentage) * 100}%`,
+            backgroundColor: `hsl(${index * 60}, 70%, 50%)`
+          }}
+        />
+      ))}
+    </div>
+  )
+}
 
-      {/* Middle Section - Brown Bar and White Box */}
-      <div className="relative mb-10">
-        <div className="bg-[#a57d57] h-4 w-full absolute top-0"></div>
-        <div className="bg-white p-6 rounded-lg shadow-md text-center">
-          <p className="text-lg text-gray-700">
-            Here are the 5 people attending <span className="text-[#fc823e] font-bold">Hack The North</span> that we think you should meet. Take the next step and reach out!
-          </p>
-        </div>
+export default function MatchingView() {
+  return (
+    <div className="container mx-auto p-4 space-y-8">
+      <div className="flex flex-col md:flex-row gap-4">
+        {/* <div className="flex-1 bg-muted rounded-lg p-4">
+          <svg className="w-full h-full" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" stroke="currentColor" strokeWidth="4" fill="none" />
+            <path d="M20 50 L80 50 M50 20 L50 80" stroke="currentColor" strokeWidth="4" />
+          </svg>
+        </div> */}
+        {/* <div className="flex-1">
+          <Image
+            width={25}
+            height={25}
+            src="/placeholder.svg?height=300&width=400"
+            alt="Matching illustration"
+            className="w-full h-full object-cover rounded-lg"
+          />
+        </div> */}
       </div>
-
-      {/* Profiles Section - 3 on top, 2 on bottom */}
-      <div className="grid grid-cols-3 gap-16 justify-items-center mb-8">
-        {matches.slice(0, 3).map((match, index) => (
-          <div
-            key={index}
-            className="relative bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 text-center w-80"
-          >
-            <img
-              src={match.photo}
-              alt={match.name}
-              className="w-24 h-24 mx-auto rounded-full mb-4"
-            />
-            <h2 className="text-xl font-bold mb-2">{match.name}</h2>
-            <p className="text-gray-700">{match.role}</p>
-            <p className="text-gray-700">{match.skills}</p>
-            <a href="#" className="text-[#fc823e] mt-2 block">Contact</a>
-          </div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-2 gap-16 justify-items-center">
-        {matches.slice(3).map((match, index) => (
-          <div
-            key={index}
-            className="relative bg-white p-8 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:scale-105 text-center w-80"
-          >
-            <img
-              src={match.photo}
-              alt={match.name}
-              className="w-24 h-24 mx-auto rounded-full mb-4"
-            />
-            <h2 className="text-xl font-bold mb-2">{match.name}</h2>
-            <p className="text-gray-700">{match.role}</p>
-            <p className="text-gray-700">{match.skills}</p>
-            <a href="#" className="text-[#fc823e] mt-2 block">Contact</a>
-          </div>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+        {people.map((person, index) => (
+          <Card key={index} className="flex flex-col">
+            <CardHeader>
+              <div className="flex items-center space-x-4">
+                <Avatar>
+                  <AvatarImage src={person.avatar} alt={person.name} />
+                  <AvatarFallback>{person.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                </Avatar>
+                <CardTitle>{person.name}</CardTitle>
+              </div>
+            </CardHeader>
+            <CardContent className="flex-grow">
+              <p className="text-sm text-muted-foreground mb-4">{person.description}</p>
+              <div className="flex flex-wrap gap-2 mb-4">
+                {person.skills.map((skill, skillIndex) => (
+                  <Badge key={skillIndex} variant="secondary">{skill}</Badge>
+                ))}
+              </div>
+              <LanguageBar languages={person.languages} />
+              <div className="text-xs text-muted-foreground mt-2">
+                {Object.entries(person.languages).map(([lang, percentage], index) => (
+                  <span key={lang}>
+                    {lang} {percentage}%{index < Object.entries(person.languages).length - 1 ? ' · ' : ''}
+                  </span>
+                ))}
+              </div>
+            </CardContent>
+            <CardFooter className="flex justify-between">
+              <Button variant="outline" size="sm" asChild>
+                <a href={`https://github.com/${person.github}`} target="_blank" rel="noopener noreferrer">
+                  <GithubIcon className="w-4 h-4 mr-2" />
+                  GitHub
+                </a>
+              </Button>
+              <Link href={'/product'}>
+              <Button size="sm" >Match</Button>
+              </Link>
+            </CardFooter>
+          </Card>
         ))}
       </div>
     </div>
-  );
-};
-
-export default Match;
+  )
+}
