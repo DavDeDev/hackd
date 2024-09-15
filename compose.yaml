@@ -1,4 +1,4 @@
-services:
+fservices:
   web:
     restart: unless-stopped
     # domainname: mydomain.com # if you want to use your own domain
