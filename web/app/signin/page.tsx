@@ -21,8 +21,8 @@ export default function SignInPage() {
               Sign in or create an account
             </h2>
             <SignInWithGitHub />
-            <SignInMethodDivider />
-            <SignInWithMagicLink handleLinkSent={() => setStep("linkSent")} />
+            {/* <SignInMethodDivider />
+            <SignInWithMagicLink handleLinkSent={() => setStep("linkSent")} /> */}
           </>
         ) : (
           <>
