@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
@@ -115,11 +115,14 @@ const totalPages = Math.ceil(questions.length / questionsPerPage)
 export default function Component() {
   const [answers, setAnswers] = useState<Record<number, string>>({})
   const [currentPage, setCurrentPage] = useState(1)
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+  const formRef = useRef<HTMLFormElement>(null)
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1)
+      setCurrentQuestionIndex(0)
     } else {
       console.log("Submitted answers:", answers)
       // Here you would typically send the answers to your backend
@@ -128,41 +131,64 @@ export default function Component() {
 
   const handlePrevious = () => {
     setCurrentPage(currentPage - 1)
+    setCurrentQuestionIndex(questionsPerPage - 1)
   }
+
+  const handleAnswer = (questionId: number, value: string) => {
+    setAnswers(prev => ({ ...prev, [questionId]: value }))
+    if (currentQuestionIndex < questionsPerPage - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1)
+    }
+  }
+
+  useEffect(() => {
+    const currentQuestionElement = formRef.current?.querySelector(`#question-${currentQuestionIndex}`)
+    if (currentQuestionElement) {
+      currentQuestionElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }
+  }, [currentQuestionIndex])
 
   const startIndex = (currentPage - 1) * questionsPerPage
   const endIndex = startIndex + questionsPerPage
   const currentQuestions = questions.slice(startIndex, endIndex)
 
   return (
-    <Card className="w-full border-none shadow-none text-center mx-auto bg-transparent">
-      <CardHeader>
+    <Card className="w-full max-w-2xl mx-auto bg-transparent shadow-none border-none">
+      <CardHeader className="text-center">
         <CardTitle>Hackathon Participant Survey</CardTitle>
         <CardDescription>Please answer the following questions on a scale of 1 to 5, where 1 is strongly disagree and 5 is strongly agree.</CardDescription>
       </CardHeader>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} ref={formRef}>
         <CardContent className="space-y-6">
           <Progress value={(currentPage / totalPages) * 100} className="w-full" />
-          {currentQuestions.map((question) => (
-            <div key={question.id} className="space-y-2">
-              <Label htmlFor={`question-${question.id}`}>{question.text}</Label>
+          {currentQuestions.map((question, index) => (
+            <div key={question.id} id={`question-${index}`} className={`space-y-4 ${index === currentQuestionIndex ? 'opacity-100' : 'opacity-50'}`}>
+              <Label htmlFor={`question-${question.id}`} className="text-center block">{question.text}</Label>
               <RadioGroup
                 id={`question-${question.id}`}
-                onValueChange={(value) => setAnswers(prev => ({ ...prev, [question.id]: value }))}
-                className="flex space-x-2 justify-center"
+                onValueChange={(value) => handleAnswer(question.id, value)}
+                className="flex justify-center items-center space-x-4"
               >
                 {[1, 2, 3, 4, 5].map((value) => (
-                  <div key={value} className="flex items-center space-x-1">
-                    <RadioGroupItem value={value.toString()} id={`q${question.id}-${value}`} />
-                    <Label htmlFor={`q${question.id}-${value}`}>{value}</Label>
+                  <div key={value} className={`flex flex-col items-center space-y-1 ${value === 1 || value === 5 ? 'scale-125' : value === 2 || value === 4 ? 'scale-110' : ''}`}>
+                    <RadioGroupItem 
+                      value={value.toString()} 
+                      id={`q${question.id}-${value}`} 
+                      className={`h-4 w-4 border-2 ${
+                        value <= 2 ? 'hover:bg-[#e4b4f9] border-[#d393f7]' : 
+                        value >= 4 ? 'hover:bg-[#baf2df] border-[#8ee9c2]' : 
+                        'hover:bg-gray-200 border-gray-400'
+                      }`}
+                    />
+                    <Label htmlFor={`q${question.id}-${value}`} className="text-xs">{value}</Label>
                   </div>
                 ))}
               </RadioGroup>
-              <p className="text-sm text-muted-foreground">{question.category}</p>
+              <p className="text-sm text-muted-foreground text-center">{question.category}</p>
             </div>
           ))}
         </CardContent>
-        <CardFooter className="flex justify-between">
+        <CardFooter className="flex justify-center space-x-4">
           {currentPage > 1 && (
             <Button type="button" variant="outline" onClick={handlePrevious}>Previous</Button>
           )}
