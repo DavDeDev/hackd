@@ -10,4 +10,12 @@ export default defineSchema({
     userId: v.id("users"),
     body: v.string(),
   }),
+  tasks: defineTable({
+    text: v.string(),
+  }),
+  survey_responses: defineTable({
+    // surveyId: v.id("surveys"),
+    userId: v.id("users"),
+    response: v.string(),
+  }),
 });

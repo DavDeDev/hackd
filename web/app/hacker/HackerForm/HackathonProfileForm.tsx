@@ -1,11 +1,13 @@
 "use client"
-import { useState, useEffect, useRef } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Progress } from "@/components/ui/progress"
-
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Id } from "@/convex/_generated/dataModel"
+import { useMutation } from "convex/react"
+import { useEffect, useRef, useState } from "react"
+import { api } from "../../../convex/_generated/api"
 const questions = [
   {
     "id": 1,
@@ -112,19 +114,26 @@ const questions = [
 const questionsPerPage = 5
 const totalPages = Math.ceil(questions.length / questionsPerPage)
 
-export default function Component() {
+export default function Component({ viewer }: { viewer: Id<"users"> }) {
   const [answers, setAnswers] = useState<Record<number, string>>({})
   const [currentPage, setCurrentPage] = useState(1)
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const formRef = useRef<HTMLFormElement>(null)
-
+  const submitResponses = useMutation(api.surveyResponse.submitSurveyResponses )
+ 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1)
       setCurrentQuestionIndex(0)
     } else {
-      console.log("Submitted answers:", answers)
+      const formattedResponses = Object.entries(answers).map(([questionId, value]) => ({
+        body: value, 
+        author: viewer  // Example author, replace with actual author
+      }))
+      
+      console.log("Submitted answers:", formattedResponses)
+      submitResponses({ responses: formattedResponses })
     }
   }
 
