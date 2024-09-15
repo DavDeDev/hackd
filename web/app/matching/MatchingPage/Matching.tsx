@@ -156,7 +156,7 @@ const people = [
     avatar: "/placeholder.svg?height=40&width=40",
     github: "charlie-brown",
     languages: { Python: 70, R: 20, SQL: 10 },
-    commitment: 88,
+    commitment: 48,
     teamDynamics: 55,
     workStyle: 62,
     skillsExperience: 95,
