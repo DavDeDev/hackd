@@ -125,7 +125,6 @@ export default function Component() {
       setCurrentQuestionIndex(0)
     } else {
       console.log("Submitted answers:", answers)
-      // Here you would typically send the answers to your backend
     }
   }
 
@@ -153,49 +152,59 @@ export default function Component() {
   const currentQuestions = questions.slice(startIndex, endIndex)
 
   return (
-    <Card className="w-3/4  mx-auto bg-transparent border-none shadow-none">
+    <Card className="w-3/4 mx-auto bg-white shadow-xl rounded-lg transition-all">
       <CardHeader className="text-center">
-        <CardTitle className="text-3xl mb-2">Hackathon Participant Survey</CardTitle>
-        <CardDescription className="text-lg">Please answer the following questions on a scale from strongly disagree to strongly agree.</CardDescription>
+        <CardTitle className="text-3xl mb-2 font-bold text-gray-700">Hackathon Participant Survey</CardTitle>
+        <CardDescription className="text-lg text-gray-600">Please answer the following questions on a scale from strongly disagree to strongly agree.</CardDescription>
       </CardHeader>
       <form onSubmit={handleSubmit} ref={formRef}>
         <CardContent className="space-y-10">
-          <Progress value={(currentPage / totalPages) * 100} className="w-full h-2" />
+          <Progress value={(currentPage / totalPages) * 100} className="w-full h-2 bg-gray-300 rounded-full" />
           {currentQuestions.map((question, index) => (
-            <div key={question.id} id={`question-${index}`} className={`space-y-6 ${index === currentQuestionIndex ? 'opacity-100' : 'opacity-50'}`}>
-              <Label htmlFor={`question-${question.id}`} className="text-center block text-xl font-medium">{question.text}</Label>
-              <div className="flex items-center justify-between px-4">
-                <span className="text-lg font-medium text-[#d393f7]">Disagree</span>
+            <div key={question.id} id={`question-${index}`} className={`space-y-6 transition-opacity duration-500 ${index === currentQuestionIndex ? 'opacity-100' : 'opacity-50'}`}>
+              <Label htmlFor={`question-${question.id}`} className="text-center block text-xl font-medium text-gray-800">{question.text}</Label>
+              <div className="flex items-center justify-between px-6">
+                <span className="text-lg font-medium text-purple-400">Disagree</span>
                 <RadioGroup
                   id={`question-${question.id}`}
                   onValueChange={(value) => handleAnswer(question.id, value)}
                   className="flex justify-center items-center space-x-6"
                 >
                   {[1, 2, 3, 4, 5].map((value) => (
-                    <div key={value} className={`flex flex-col items-center space-y-1 ${value === 1 || value === 5 ? 'scale-125' : value === 2 || value === 4 ? 'scale-110' : ''}`}>
-                    <RadioGroupItem 
-                      key={value}
-                      value={value.toString()} 
-                      id={`q${question.id}-${value}`} 
-                      className={`h-8 w-8 border-4 ${
-                        value <= 2 ? 'hover:bg-[#e4b4f9] border-[#d393f7]' : 
-                        value >= 4 ? 'hover:bg-[#baf2df] border-[#8ee9c2]' : 
-                        'hover:bg-gray-200 border-gray-400'
+                    <div 
+                      key={value} 
+                      className={`flex flex-col items-center space-y-1 transition-transform ${
+                        value === 1 || value === 5 ? 'scale-125' : 
+                        value === 2 || value === 4 ? 'scale-110' : ''
                       }`}
-                    /></div>
+                    >
+                      <RadioGroupItem
+                        key={value}
+                        value={value.toString()}
+                        id={`q${question.id}-${value}`}
+                        className={`h-8 w-8 border-4 rounded-full transition-colors duration-300 ${
+                          value <= 2 ? 'hover:bg-[#e4b4f9] border-[#d393f7]' : 
+                          value >= 4 ? 'hover:bg-[#baf2df] border-[#8ee9c2]' : 
+                          'hover:bg-gray-200 border-gray-400'
+                        }`}
+                      />
+                    </div>
                   ))}
                 </RadioGroup>
-                <span className="text-lg font-medium text-[#8ee9c2]">Agree</span>
+
+                <span className="text-lg font-medium text-green-400">Agree</span>
               </div>
-              <p className="text-base text-muted-foreground text-center">{question.category}</p>
+              <p className="text-base text-gray-500 text-center">{question.category}</p>
             </div>
           ))}
         </CardContent>
         <CardFooter className="flex justify-center space-x-4">
           {currentPage > 1 && (
-            <Button type="button" variant="outline" onClick={handlePrevious} className="text-lg px-6 py-3">Previous</Button>
+            <Button type="button" variant="outline" onClick={handlePrevious} className="text-lg px-6 py-3 transition-colors duration-200 bg-white hover:bg-gray-100 rounded-lg">
+              Previous
+            </Button>
           )}
-          <Button type="submit" className="text-lg px-6 py-3">
+          <Button type="submit" className="text-lg px-6 py-3 transition-colors duration-200 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
             {currentPage < totalPages ? "Next" : "Submit"}
           </Button>
         </CardFooter>
