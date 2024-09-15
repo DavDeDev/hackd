@@ -9,6 +9,7 @@ import { GithubIcon } from "lucide-react";
 import Link from "next/link";
 import styled, { keyframes } from "styled-components";
 import { Pie } from "react-chartjs-2";
+import Image from "next/image";
 ChartJS.register(ArcElement, Tooltip, Legend);
 const TechStackPieChart = () => {
   const data = {
@@ -263,7 +264,9 @@ export default function MatchingView() {
 
               {/* Display Larger Avatar */}
               <div className="flex justify-center sm:justify-start mt-6">
-                <img
+                <Image
+                  width={64}
+                  height={64}
                   src={tqProfile.avatar_url}
                   alt={`${tqProfile.name}'s avatar`}
                   className="rounded-full w-56 h-56 object-cover"
