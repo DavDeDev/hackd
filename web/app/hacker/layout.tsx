@@ -62,7 +62,7 @@ function SplashPageNav() {
   return (
     <>
     
-      <Link href="/product">
+      <Link href="/hacker">
         <Button>Get Started</Button>
       </Link>
     </>

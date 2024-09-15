@@ -41,7 +41,7 @@ const TechStackPieChart = () => {
 
 
 const fetchGithubProfile = async () => {
-  const response = await fetch("https://api.github.com/users/tqmsh");
+  const response = await fetch("https://api.github.com/users/DavDeDev");
   const data = await response.json();
   return data;
 };
@@ -264,11 +264,11 @@ export default function MatchingView() {
 
               {/* Display Larger Avatar */}
               <div className="flex justify-center sm:justify-start mt-6">
-                <img
-                  src={tqProfile.avatar_url}
-                  alt={`${tqProfile.name}'s avatar`}
-                  className="rounded-full w-56 h-56 object-cover"
-                />
+              <img
+                src={tqProfile.avatar_url}
+                alt={`${tqProfile.name}'s avatar`}
+                className="rounded-full w-56 h-56 object-cover"
+              />
               </div>
 
             </div>

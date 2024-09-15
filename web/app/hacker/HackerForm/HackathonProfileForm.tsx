@@ -13,102 +13,102 @@ const questions = [
   {
     "id": 1,
     "text": "I prefer to lead team projects.",
-    "category": "Motivation and Goals"
+    "category": "‎ "
   },
   {
     "id": 2,
     "text": "I am excited about attending multiple workshops and events at the hackathon.",
-    "category": "Commitment Level"
+    "category": "‎ "
   },
   {
     "id": 3,
     "text": "I enjoy brainstorming and collaborating on ideas with others.",
-    "category": "Team Dynamics"
+    "category": "‎ "
   },
   {
     "id": 4,
     "text": "I like when my teammates have skills that complement mine.",
-    "category": "Team Dynamics"
+    "category": "‎ "
   },
   {
     "id": 5,
     "text": "Winning the hackathon is my top priority.",
-    "category": "Commitment Level"
+    "category": "‎"
   },
   {
     "id": 6,
     "text": "I am open to learning new technologies during the event.",
-    "category": "Skills and Experience"
+    "category": "‎"
   },
   {
     "id": 7,
     "text": "I work best under tight deadlines.",
-    "category": "Work Style"
+    "category": "‎"
   },
   {
     "id": 8,
     "text": "I prefer working with teammates who share similar strengths.",
-    "category": "Team Dynamics"
+    "category": "‎"
   },
   {
     "id": 9,
     "text": "I appreciate constructive feedback on my work.",
-    "category": "Skills and Experience"
+    "category": "‎"
   },
   {
     "id": 10,
     "text": "I am confident in my coding abilities.",
-    "category": "Skills and Experience"
+    "category": "‎"
   },
   {
     "id": 11,
     "text": "I enjoy taking on challenging problems.",
-    "category": "Skills and Experience"
+    "category": "‎"
   },
   {
     "id": 12,
     "text": "I prefer a well-structured plan before starting a project.",
-    "category": "Work Style"
+    "category": "‎"
   },
   {
     "id": 13,
     "text": "I am comfortable adapting to changes during the project.",
-    "category": "Work Style"
+    "category": "‎"
   },
   {
     "id": 14,
     "text": "I like to focus on one task at a time.",
-    "category": "Work Style"
+    "category": "‎"
   },
   {
     "id": 15,
     "text": "I am eager to help teammates who are struggling.",
-    "category": "Team Dynamics"
+    "category": "‎"
   },
   {
     "id": 16,
     "text": "I value creativity over functionality in projects.",
-    "category": "Motivation and Goals"
+    "category": "‎"
   },
   {
     "id": 17,
     "text": "I believe communication is key to a successful team.",
-    "category": "Team Dynamics"
+    "category": "‎"
   },
   {
     "id": 18,
     "text": "I am motivated by learning rather than winning.",
-    "category": "Motivation and Goals"
+    "category": "‎"
   },
   {
     "id": 19,
     "text": "I have experience with version control systems like GitHub.",
-    "category": "Skills and Experience"
+    "category": "‎"
   },
   {
     "id": 20,
     "text": "I enjoy working late hours to meet project goals.",
-    "category": "Commitment Level"
+    "category": "‎"
   }
 ]
  
