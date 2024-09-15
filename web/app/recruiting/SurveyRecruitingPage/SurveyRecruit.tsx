@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import './SurveyRecruit.css';
 
@@ -119,12 +119,25 @@ const SubmitButton = styled.button`
   }
 `;
 
-// Redirect on button click
-const handleSubmit = () => {
-  window.location.href = 'http://localhost:3000/recruitMatching';
-};
-
 const RecruitingPage = () => {
+  const [jobDescription, setJobDescription] = useState<string>('');
+  const [response, setResponse] = useState<string>('');
+
+  const handleSubmit = async () => {
+    try {
+      const res = await fetch('http://localhost:3000/analyze-sentiment', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: jobDescription })
+      });
+      const data = await res.json();
+      setResponse(data.summary);
+      window.location.href = 'http://localhost:3000/recruitMatching';
+    } catch (error) {
+      console.error('Error submitting job description:', error);
+    }
+  };
+
   return (
     <Container>
       <Header>
@@ -139,7 +152,12 @@ const RecruitingPage = () => {
           <p className="text-lg text-gray-700 mb-4">
             Are you looking to hire talented engineers? Please fill in your job description here so we can find the right match for you!
           </p>
-          <JobDescriptionTextarea rows={6} placeholder="Enter job description..." />
+          <JobDescriptionTextarea
+            rows={6}
+            placeholder="Enter job description..."
+            value={jobDescription}
+            onChange={(e) => setJobDescription(e.target.value)}
+          />
         </JobDescriptionBox>
       </JobDescriptionSection>
 
