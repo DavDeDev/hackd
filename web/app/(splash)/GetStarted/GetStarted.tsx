@@ -31,7 +31,7 @@ export const GetStarted = () => {
         </div>
         <div className="mb-16 flex justify-center gap-4">
           <Button asChild size="lg">
-            <Link href="/product">Get Started</Link>
+            <Link href="/hacker">Get Started</Link>
           </Button>
           <Button asChild size="lg" variant="outline">
             <Link href="https://docs.convex.dev/home">Convex docs</Link>
