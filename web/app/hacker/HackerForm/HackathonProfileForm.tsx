@@ -167,7 +167,7 @@ export default function Component() {
                 <span className="text-lg font-medium text-purple-400">Disagree</span>
                 <RadioGroup
                   id={`question-${question.id}`}
-                  onValueChange={(value) => handleAnswer(question.id, value)}
+                  onValueChange={(value: any) => handleAnswer(question.id, value)}
                   className="flex justify-center items-center space-x-6"
                 >
                   {[1, 2, 3, 4, 5].map((value) => (
@@ -182,16 +182,20 @@ export default function Component() {
                         key={value}
                         value={value.toString()}
                         id={`q${question.id}-${value}`}
-                        className={`h-8 w-8 border-4 rounded-full transition-colors duration-300 ${
-                          value <= 2 ? 'hover:bg-[#e4b4f9] border-[#d393f7]' : 
-                          value >= 4 ? 'hover:bg-[#baf2df] border-[#8ee9c2]' : 
-                          'hover:bg-gray-200 border-gray-400'
+                        className={`h-8 w-8 rounded-full transition-colors duration-300 ${
+                          answers[question.id] === value.toString() 
+                            ? (value <= 2 ? 'bg-[#d393f7] border-[#d393f7]' 
+                            : value >= 4 ? 'bg-[#8ee9c2] border-[#8ee9c2]' 
+                            : 'bg-gray-400 border-gray-400') 
+                            : 'border-4 ' + (value <= 2 ? 'hover:bg-[#e4b4f9] border-[#d393f7]' 
+                            : value >= 4 ? 'hover:bg-[#baf2df] border-[#8ee9c2]' 
+                            : 'hover:bg-gray-200 border-gray-400')
                         }`}
+                        onClick={() => handleAnswer(question.id, value.toString())}
                       />
                     </div>
                   ))}
                 </RadioGroup>
-
                 <span className="text-lg font-medium text-green-400">Agree</span>
               </div>
               <p className="text-base text-gray-500 text-center">{question.category}</p>
