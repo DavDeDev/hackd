@@ -121,7 +121,7 @@ const SubmitButton = styled.button`
 
 // Redirect on button click
 const handleSubmit = () => {
-  window.location.href = 'http://localhost:3000/matching';
+  window.location.href = 'http://localhost:3000/recruitMatching';
 };
 
 const RecruitingPage = () => {
