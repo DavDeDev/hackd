@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { UserMenu } from "@/components/UserMenu";
 import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";
@@ -22,8 +23,9 @@ export default function SplashPageLayout({
               className="rounded-full"/>
           </Link>
           <div className="flex items-center gap-4">
-            <SplashPageNav />
+          <UserMenu>David</UserMenu>
           </div>
+
         </nav>
       </header>
       <main className="flex grow flex-col">{children}</main>
