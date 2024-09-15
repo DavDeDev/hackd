@@ -74,7 +74,7 @@ export default function MatchingView() {
     <>
       <div className="container mx-auto p-4 space-y-8">
         <MessageBox>
-          These are the results closest to the desired tech stack. Review and take action!
+          These are the results closest to the desired tech stack, as well to help the recruiters, there is an aptitude test for the users for you to look at too.
         </MessageBox>
         <Button onClick={handleFlipAll} className="mb-4">
           {allFlipped ? "Undo Flip All" : "Flip All"}
