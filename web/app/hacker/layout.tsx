@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ReactNode } from "react";
 import ConvexClientProvider from "@/components/ConvexClientProvider";
+import { UserMenu } from "@/components/UserMenu";
+
 
 export default function SplashPageLayout({
   children,
@@ -26,6 +28,7 @@ export default function SplashPageLayout({
           <div className="flex items-center gap-4">
             <SplashPageNav />
           </div>
+          <UserMenu>David</UserMenu>
         </nav>
       </header>
       <main className="flex grow flex-col">{children}</main>
