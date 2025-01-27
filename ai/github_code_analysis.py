@@ -12,12 +12,10 @@ from sklearn.metrics.pairwise import cosine_similarity
 # -----------------------------------
 # Configuration
 # -----------------------------------
+ 
+GITHUB_TOKEN = '***REMOVED***' 
+COHERE_API_KEY = 'REMOVED_COHERE_API_KEY ' 
 
-# Set your GitHub and Cohere API tokens
-GITHUB_TOKEN = '***REMOVED***'  # Realistic-looking GitHub token
-COHERE_API_KEY = 'your_cohere_api_key_12345' 
-
-# Path to your JSON file containing GitHub usernames
 JSON_FILE_PATH = '/home/user/github_analysis/usernames.json 
 
 # Output CSV file path
