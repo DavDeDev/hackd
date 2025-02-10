@@ -6,7 +6,7 @@ import ConvexClientProvider from "@/components/ConvexClientProvider";
 import { UserMenu } from "@/components/UserMenu";
 
 
-export default function SplashPageLayout({
+export default function SplashPageLayout({ 
   children,
 }: {
   children: ReactNode;
