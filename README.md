@@ -5,7 +5,7 @@
 
 A basic Next.js app with a Dockerfile and docker-compose ready to deploy to AWS with [Defang](https://defang.io) with GitHub Actions configured for CI/CD.
 
-## Steps to Set Up
+## Steps to Set Up 
 
 1. **Install Defang**  
    Run the following command to install Defang:
