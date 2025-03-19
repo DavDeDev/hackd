@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import cohere
+import os
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import MinMaxScaler
@@ -8,7 +9,7 @@ import numpy as np
 app = Flask(__name__)
 
 # Initialize Cohere client
-COHERE_API_KEY = 'd1f8c59f-8243-4d25-b2ac-7c25b8d63f92'
+COHERE_API_KEY = os.getenv('COHERE_API_KEY')
 co = cohere.Client(COHERE_API_KEY)
 
 # Load and preprocess data
