@@ -22,7 +22,14 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-CORS(app)  # Enable CORS for frontend
+
+# Configure CORS for both development and production
+if os.environ.get('FLASK_ENV') == 'production':
+    # Production: Allow specific origins
+    CORS(app, origins=['*'])  # In production, specify your frontend domain
+else:
+    # Development: Allow all origins
+    CORS(app)
 
 # Initialize services
 github_analyzer = None

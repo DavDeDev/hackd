@@ -27,7 +27,7 @@ services:
         target: 3000
     environment:
       - NODE_ENV=production
-      - NEXT_PUBLIC_API_URL=https://hackd-api--${DEFANG_PROJECT_NAME}.defang.dev
+      - NEXT_PUBLIC_API_URL=http://hackd-api:5000
     deploy:
       resources:
         reservations:
