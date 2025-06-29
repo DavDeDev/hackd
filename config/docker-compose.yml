@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  # Backend API Service
+  hackd-api:
+    build:
+      context: ../backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=development
+      - FLASK_DEBUG=1
+    env_file:
+      - ../backend/.env
+    volumes:
+      - ../backend:/app
+    depends_on:
+      - redis
+    command: python main.py
+    
+  # Frontend Service
+  hackd-frontend:
+    build:
+      context: ../frontend/hackd-web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - NEXT_PUBLIC_API_URL=http://localhost:5000
+    env_file:
+      - ../frontend/hackd-web/.env.local
+    volumes:
+      - ../frontend/hackd-web:/app
+      - /app/node_modules
+    depends_on:
+      - hackd-api
+    command: npm run dev
+
+  # Redis for caching (optional)
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    command: redis-server --appendonly yes
+
+volumes:
+  redis_data: 
