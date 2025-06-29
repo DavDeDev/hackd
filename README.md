@@ -143,12 +143,7 @@ console.log(profile.top_technologies); // ['JavaScript', 'Python', 'React']
 
 ## 🧠 AI Matching Algorithm
 
-Our matching algorithm combines multiple factors:
-
-1. **Tech Complementarity (40%)**: Uses cosine similarity on technology embeddings
-2. **Experience Level (30%)**: Matches based on code complexity analysis
-3. **Collaboration Score (20%)**: Analyzes PR activity, code comments, documentation
-4. **Activity Level (10%)**: Repository count and commit frequency
+Our matching algorithm combines multiple factors: 
 
 ```python
 # Core matching logic
