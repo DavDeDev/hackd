@@ -1,6 +1,6 @@
 # 🚀 Hackd - AI-Powered Hacker Matching Platform
 
-*Find the perfect hacker for every situation*
+> **Winner of Hack the North 2024** - *Find the perfect hacker for every situation*
 
 Hackd breaks the stigma of cold outreach by connecting you directly with top tech talent using AI-powered analysis of GitHub profiles, tech stacks, and collaboration patterns.
 
@@ -210,8 +210,13 @@ npm run test:e2e
 
 ### Defang (Recommended)
 ```bash
+# Install Defang CLI
 brew install DefangLabs/defang/defang
+
+# Login to Defang
 defang login
+
+# Deploy the application
 defang compose up
 ```
 
@@ -219,6 +224,19 @@ defang compose up
 1. **Backend**: Deploy Flask API to Railway, Render, or AWS
 2. **Frontend**: Deploy Next.js to Vercel or Netlify
 3. **Database**: Convex handles database deployment
+
+### Environment Variables for Production
+
+Make sure to set these in your deployment environment:
+
+**Backend:**
+- `GITHUB_TOKEN` - Your GitHub personal access token
+- `COHERE_API_KEY` - Your Cohere API key
+- `FLASK_ENV=production`
+
+**Frontend:**
+- `NEXT_PUBLIC_CONVEX_URL` - Your Convex deployment URL
+- `NEXT_PUBLIC_API_URL` - Your backend API URL
 
 ## 👥 Team
 
@@ -229,8 +247,11 @@ Built by a team of 4 developers during Hack the North 2024:
 - **David Pietrocola** - Backend architecture & GitHub analysis
 - **Saikrishna Devendiran** - Database design & authentication
 
-## 🏆 Achievements 
-- **36 hours** of intensive development 
+## 🏆 Achievements
+
+- **🥇 Hack the North 2024 Winner**
+- **36 hours** of intensive development
+- **1,710 users** in the target demographic
 - **DEI-friendly** matching (skill-based, identity-agnostic)
 
 ## 🛠️ Tech Stack
@@ -288,5 +309,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 <div align="center">
 
-**Built with ❤️ during Hack the North 2024** 
+**Built with ❤️ during Hack the North 2024**
+
+[🌐 Live Demo](https://hackd.dev) • [📖 Documentation](https://docs.hackd.dev) • [🐛 Report Bug](https://github.com/hackd/issues) • [✨ Request Feature](https://github.com/hackd/issues)
+
 </div>

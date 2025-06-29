@@ -1,0 +1,36 @@
+services:
+  # Backend API Service
+  hackd-api:
+    build: ./backend
+    ports:
+      - mode: ingress
+        target: 5000
+    environment:
+      - FLASK_ENV=production
+      - PORT=5000
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Frontend Service  
+  hackd-frontend:
+    build: ./frontend/hackd-web
+    ports:
+      - mode: ingress
+        target: 3000
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=https://hackd-api--${DEFANG_PROJECT_NAME}.defang.dev
+    deploy:
+      resources:
+        reservations:
+          memory: 512M
+    depends_on:
+      - hackd-api 
