@@ -84,7 +84,7 @@ node_modules/
 *.swo
 *~
 
-# OS generated files
+# OS generated files - IMPORTANT!
 .DS_Store
 .DS_Store?
 ._*
