@@ -1,13 +1,14 @@
 # Hackd Backend - Python Dependencies
+# Build Dependencies
+setuptools>=65.0
+wheel>=0.37.0
+
 # Core Framework
 Flask==2.3.3
 Flask-CORS==4.0.0
 
 # AI & Machine Learning
 cohere==4.37
-scikit-learn==1.3.2
-numpy==1.24.4
-pandas==2.1.4
 
 # GitHub API
 PyGithub==1.59.1

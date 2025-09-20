@@ -111,30 +111,112 @@ const SubmitButton = styled.button`
   border-radius: 50px;
   cursor: pointer;
   margin-top: 2rem;
-  opacity: 1;  /* Ensure button stays visible */
+  opacity: 1;
   transition: all 0.3s ease;
-  &:hover {
+  min-width: 200px;
+  
+  &:hover:not(:disabled) {
     transform: translateY(-5px);
-    box-shadow: 0 0 12px rgba(252, 130, 62, 0.6);  /* Glow effect on hover */
+    box-shadow: 0 0 12px rgba(252, 130, 62, 0.6);
+  }
+  
+  &:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+`;
+
+const ErrorMessage = styled.div`
+  background: #fee;
+  border: 1px solid #fcc;
+  color: #c33;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  text-align: center;
+`;
+
+const LoadingSpinner = styled.div`
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255,255,255,.3);
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
 `;
 
 const RecruitingPage = () => {
   const [jobDescription, setJobDescription] = useState<string>('');
-  const [response, setResponse] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
   const handleSubmit = async () => {
+    if (!jobDescription.trim()) {
+      setError('Please enter a job description');
+      return;
+    }
+
+    setIsLoading(true);
+    setError('');
+    
     try {
-      const res = await fetch('http://localhost:3000/analyze-sentiment', {
+      console.log('🚀 Submitting job description for analysis...');
+      
+      // Sample candidate pool for demo - in production this would come from your database
+      const sampleCandidates = [
+        'octocat', 'torvalds', 'gaearon', 'tj', 'sindresorhus', 
+        'addyosmani', 'paulirish', 'getify', 'feross', 'substack'
+      ];
+      
+      const requestBody = {
+        job_description: jobDescription,
+        candidates: sampleCandidates,
+        include_debug: true
+      };
+      
+      console.log('📤 Request payload:', requestBody);
+      
+      const res = await fetch('http://localhost:5000/api/analyze-job-description', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: jobDescription })
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
       });
+      
+      console.log('📥 Response status:', res.status);
+      
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || `HTTP ${res.status}: ${res.statusText}`);
+      }
+      
       const data = await res.json();
-      setResponse(data.summary);
-      window.location.href = 'http://localhost:3000/recruitMatching';
+      console.log('✅ Job analysis successful:', data);
+      
+      // Store results in sessionStorage for the results page
+      sessionStorage.setItem('hackd_job_analysis', JSON.stringify({
+        jobDescription,
+        analysisResults: data,
+        timestamp: Date.now()
+      }));
+      
+      console.log('🔄 Redirecting to results page...');
+      window.location.href = '/recruitMatching';
+      
     } catch (error) {
-      console.error('Error submitting job description:', error);
+      console.error('❌ Error analyzing job description:', error);
+      setError(error instanceof Error ? error.message : 'An error occurred while analyzing the job description');
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -161,7 +243,17 @@ const RecruitingPage = () => {
         </JobDescriptionBox>
       </JobDescriptionSection>
 
-      <SubmitButton onClick={handleSubmit}>Submit</SubmitButton>
+      <SubmitButton onClick={handleSubmit} disabled={isLoading || !jobDescription.trim()}>
+        {isLoading ? (
+          <>
+            <LoadingSpinner /> Analyzing Job Description...
+          </>
+        ) : (
+          'Find My Perfect Matches'
+        )}
+      </SubmitButton>
+      
+      {error && <ErrorMessage>{error}</ErrorMessage>}
     </Container>
   );
 };
